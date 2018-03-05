@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin">8dp</dimen>
+    <dimen name="padding">4dp</dimen>
+
+    <!-- Font sizes -->
+    <dimen name="title_size">20sp</dimen>
+    <dimen name="counter_size">24sp</dimen>
+    <dimen name="button_size">20sp</dimen>
+
+    <!-- Score table gaps -->
+    <dimen name="h_gap">1dp</dimen>
+    <dimen name="v_gap">1dp</dimen>
+
+    <!-- Button elevation -->
+    <dimen name="elevation">16dp</dimen>
+
+    <!-- OK button text size -->
+    <dimen name="ok_size">16sp</dimen>
+</resources>

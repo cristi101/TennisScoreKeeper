@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="eu.baboi.cristian.tennisscorekeeper.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grass">
+
+        <!-- The background image is adapted after
+         https://commons.wikimedia.org/wiki/File:Tennis_court_imperial.svg -->
+        <!-- The background -->
+        <ImageView
+            android:id="@+id/bkgd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/tennis_court" />
+
+        <!-- Middle column -->
+        <LinearLayout
+            android:id="@+id/col_m"
+            style="@style/column"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/padding"
+            android:layout_marginRight="@dimen/padding">
+
+            <!-- The title of the column -->
+            <TextView
+                style="@style/title"
+                android:text="@string/score" />
+
+            <!-- Sets label -->
+            <TextView
+                style="@style/score"
+                android:text="@string/sets" />
+
+            <!-- Games label -->
+            <TextView
+                style="@style/score"
+                android:text="@string/games" />
+
+            <!-- Points label -->
+            <TextView
+                android:id="@+id/tv_game_info"
+                style="@style/score"
+                android:text="@string/points" />
+
+            <!-- Reset button-->
+            <Button
+                android:id="@+id/reset"
+                style="@style/button"
+                android:text="@string/reset" />
+
+            <!-- Aces label -->
+            <TextView
+                style="@style/score"
+                android:text="@string/aces" />
+
+            <!-- Undo button -->
+            <Button
+                android:id="@+id/undo"
+                style="@style/button"
+                android:text="@string/undo" />
+
+            <!-- Faults label -->
+            <TextView
+                style="@style/score"
+                android:text="@string/faults" />
+
+        </LinearLayout>
+
+        <!-- Column A -->
+        <LinearLayout
+            android:id="@+id/col_a"
+            style="@style/column"
+            android:layout_toLeftOf="@id/col_m"
+            tools:ignore="RtlHardcoded">
+
+            <!-- The title of the column -->
+            <TextView
+                style="@style/title"
+                android:text="@string/player_a" />
+
+            <!-- Number of sets -->
+            <TextView
+                android:id="@+id/tv_sets_a"
+                style="@style/score"
+                android:text="0" />
+
+            <!-- Number of games -->
+            <TextView
+                android:id="@+id/tv_games_a"
+                style="@style/score"
+                android:text="0" />
+
+
+            <!-- Number of points -->
+            <TextView
+                android:id="@+id/tv_points_a"
+                style="@style/score"
+                android:text="0" />
+
+            <!-- Points button -->
+            <Button
+                android:id="@+id/point_a"
+                style="@style/button"
+                android:text="@string/point" />
+
+            <!-- Number of aces -->
+            <TextView
+                android:id="@+id/tv_aces_a"
+                style="@style/score"
+                android:text="0" />
+
+            <!-- Aces button -->
+            <Button
+                android:id="@+id/ace_a"
+                style="@style/button"
+                android:text="@string/ace" />
+
+            <!-- Number of faults -->
+            <TextView
+                android:id="@+id/tv_faults_a"
+                style="@style/score"
+                android:text="0" />
+
+            <!-- Faults button -->
+            <Button
+                android:id="@+id/fault_a"
+                style="@style/button"
+                android:text="@string/fault" />
+
+        </LinearLayout>
+
+        <!-- Column B -->
+        <LinearLayout
+            android:id="@+id/col_b"
+            style="@style/column"
+            android:layout_toRightOf="@id/col_m"
+            tools:ignore="RtlHardcoded">
+
+            <!-- The title of the column -->
+            <TextView
+                style="@style/title"
+                android:text="@string/player_b" />
+
+            <!-- Number of sets -->
+            <TextView
+                android:id="@+id/tv_sets_b"
+                style="@style/score"
+                android:text="0" />
+
+            <!-- Number of games -->
+            <TextView
+                android:id="@+id/tv_games_b"
+                style="@style/score"
+                android:text="0" />
+
+            <!-- Number of points -->
+            <TextView
+                android:id="@+id/tv_points_b"
+                style="@style/score"
+                android:text="0" />
+
+            <!-- Points button -->
+            <Button
+                android:id="@+id/point_b"
+                style="@style/button"
+                android:text="@string/point" />
+
+            <!-- Number of aces -->
+            <TextView
+                android:id="@+id/tv_aces_b"
+                style="@style/score"
+                android:text="0" />
+
+            <!-- Aces button -->
+            <Button
+                android:id="@+id/ace_b"
+                style="@style/button"
+                android:text="@string/ace" />
+
+            <!-- Number of faults -->
+            <TextView
+                android:id="@+id/tv_faults_b"
+                style="@style/score"
+                android:text="0" />
+
+            <!-- Faults button -->
+            <Button
+                android:id="@+id/fault_b"
+                style="@style/button"
+                android:text="@string/fault" />
+
+        </LinearLayout>
+
+        <!-- The set scores -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/col_a"
+            android:layout_alignRight="@id/col_b"
+            android:layout_below="@id/col_a"
+            android:layout_margin="@dimen/padding"
+            tools:ignore="RtlHardcoded">
+
+            <View
+                android:id="@+id/centre"
+                android:layout_width="@dimen/h_gap"
+                android:layout_height="@dimen/v_gap"
+                android:layout_below="@id/top"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/top"
+                style="@style/heading"
+                android:layout_toLeftOf="@id/centre"
+                android:text="@string/player_a"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/tv_set_record_a"
+                style="@style/info"
+                android:layout_above="@id/centre"
+                android:layout_toRightOf="@id/centre"
+                android:text=""
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                style="@style/heading"
+                android:layout_below="@id/centre"
+                android:layout_toLeftOf="@id/centre"
+                android:text="@string/player_b"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/tv_set_record_b"
+                style="@style/info"
+                android:layout_below="@id/centre"
+                android:layout_toRightOf="@id/centre"
+                android:text=""
+                tools:ignore="RtlHardcoded" />
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

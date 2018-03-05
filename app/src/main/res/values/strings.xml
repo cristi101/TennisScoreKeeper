@@ -1,0 +1,34 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Tennis Score Keeper</string>
+
+    <string name="score">Score</string>
+
+    <!-- Player names -->
+    <string name="player_a">Mr. A</string>
+    <string name="player_b">Mr. B</string>
+
+    <!-- Score labels -->
+    <string name="sets">Sets</string>
+    <string name="games">Games</string>
+    <string name="points">Points</string>
+    <string name="tie">Tie</string>
+
+    <string name="aces">Aces</string>
+    <string name="faults">Double\nfaults</string>
+
+    <!-- Button labels -->
+    <string name="point">Point</string>
+    <string name="ace">Ace</string>
+    <string name="fault">Double\nfault</string>
+
+    <string name="reset">Reset</string>
+    <string name="undo">Undo</string>
+
+    <!-- OK dialog button label -->
+    <string name="ok">OK</string>
+
+    <!-- Announcements -->
+    <string name="win_game">Game for <xliff:g example="John" id="name">%1$s</xliff:g></string>
+    <string name="win_set">Game, Set for <xliff:g example="John" id="name">%1$s</xliff:g></string>
+    <string name="win_match">Game, Set, Match\nfor <xliff:g example="John" id="name">%1$s</xliff:g></string>
+</resources>

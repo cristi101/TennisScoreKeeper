@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- The color for the tennis court -->
+    <color name="grass">#00962d</color>
+
+    <!-- The color for the text -->
+    <color name="text">#6200ea</color>
+
+    <!-- The color for the background  -->
+    <color name="background">#80aeea00</color>
+
+    <!-- Color for the buttons -->
+    <color name="button">#FF9800</color>
+
+    <!-- White -->
+    <color name="white">#ffffff</color>
+</resources>
