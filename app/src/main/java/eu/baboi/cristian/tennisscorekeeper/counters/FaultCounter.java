@@ -12,9 +12,12 @@ public final class FaultCounter implements Counter {
     // The keys for saving the double faults counters
     private final static String FAULTS_PLAYER_A = "FAULTS_A";
     private final static String FAULTS_PLAYER_B = "FAULTS_B";
+    private final static String R_FAULTS_PLAYER_A = "R_FAULTS_A";
+    private final static String R_FAULTS_PLAYER_B = "R_FAULTS_B";
 
     // Double fault counters for the two players
     private final int[] faults = {0, 0};
+    private final int[] retained = {0, 0};
 
     // Reference to the interface
     private final TextView[] mtvFaults;
@@ -52,10 +55,20 @@ public final class FaultCounter implements Counter {
         displayFaultCounter(1);
     }
 
+    // Retain the current value of the counters
+    @Override
+    public void retain() {
+        retained[0] = faults[0];
+        retained[1] = faults[1];
+    }
+
     // Restore the counters to the previous value
     @Override
     public void undo() {
-        // TO DO
+        faults[0] = retained[0];
+        faults[1] = retained[1];
+        displayFaultCounter(0);
+        displayFaultCounter(1);
     }
 
     // Save the counters state
@@ -63,6 +76,9 @@ public final class FaultCounter implements Counter {
         // Save the number of double faults scored
         outState.putInt(FAULTS_PLAYER_A, faults[0]);
         outState.putInt(FAULTS_PLAYER_B, faults[1]);
+
+        outState.putInt(R_FAULTS_PLAYER_A, retained[0]);
+        outState.putInt(R_FAULTS_PLAYER_B, retained[1]);
     }
 
     // Restore the counters state
@@ -70,6 +86,9 @@ public final class FaultCounter implements Counter {
         // Retrieve the number of double faults scored
         faults[0] = savedInstanceState.getInt(FAULTS_PLAYER_A);
         faults[1] = savedInstanceState.getInt(FAULTS_PLAYER_B);
+
+        retained[0] = savedInstanceState.getInt(R_FAULTS_PLAYER_A);
+        retained[1] = savedInstanceState.getInt(R_FAULTS_PLAYER_B);
         // Display the counters
         displayFaultCounter(0);
         displayFaultCounter(1);

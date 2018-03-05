@@ -19,7 +19,10 @@ public final class PointCounter implements Counter {
     // The keys for saving the point counters
     private final static String POINTS_PLAYER_A = "POINTS_A";
     private final static String POINTS_PLAYER_B = "POINTS_B";
+    private final static String R_POINTS_PLAYER_A = "R_POINTS_A";
+    private final static String R_POINTS_PLAYER_B = "R_POINTS_B";
     private final static String TIE_BREAK = "TIE";
+    private final static String R_TIE_BREAK = "R_TIE";
     private final static String WINNER = "WINNER";
 
     // Constants
@@ -44,9 +47,11 @@ public final class PointCounter implements Counter {
 
     // Point counters for the two players
     private final int[] points = {0, 0};
+    private final int[] retained = {0, 0};
 
     // True if we are in a tie-break game
     private boolean tie;
+    private boolean retainedTie;
 
     // Reference to the interface
     private final TextView[] mtvPoints;
@@ -97,13 +102,23 @@ public final class PointCounter implements Counter {
         displayPointCounters();
     }
 
+    // Retain the current state of the counters
+    @Override
+    public void retain() {
+        retainedTie = tie;
+        retained[0] = points[0];
+        retained[1] = points[1];
+    }
+
     // Restore the counters to the previous value
     @Override
     public void undo() {
-        // TO DO
+        tie = retainedTie;
+        points[0] = retained[0];
+        points[1] = retained[1];
+        displayPointCounters();
     }
 
-    // Error - There is more state to save&restore
 
     // Save the counter state
     public void save(Bundle outState) {
@@ -118,10 +133,14 @@ public final class PointCounter implements Counter {
 
         // Save the tie-break state
         outState.putBoolean(TIE_BREAK, tie);
+        outState.putBoolean(R_TIE_BREAK, retainedTie);
 
         // Save the number of points scored
         outState.putInt(POINTS_PLAYER_A, points[0]);
         outState.putInt(POINTS_PLAYER_B, points[1]);
+
+        outState.putInt(R_POINTS_PLAYER_A, retained[0]);
+        outState.putInt(R_POINTS_PLAYER_B, retained[1]);
     }
 
     // Restore the counter state
@@ -133,10 +152,14 @@ public final class PointCounter implements Counter {
 
         // Retrieve the tie-break state
         tie = savedInstanceState.getBoolean(TIE_BREAK);
+        retainedTie = savedInstanceState.getBoolean(R_TIE_BREAK);
 
         // Retrieve the number of points scored
         points[0] = savedInstanceState.getInt(POINTS_PLAYER_A);
         points[1] = savedInstanceState.getInt(POINTS_PLAYER_B);
+
+        retained[0] = savedInstanceState.getInt(R_POINTS_PLAYER_A);
+        retained[1] = savedInstanceState.getInt(R_POINTS_PLAYER_B);
 
         // Display the counters
         displayPointCounters();

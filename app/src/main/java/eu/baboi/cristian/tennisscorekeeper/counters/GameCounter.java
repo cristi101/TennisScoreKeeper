@@ -15,12 +15,19 @@ public final class GameCounter implements Counter {
     private final static String RECORD_PLAYER_A = "RECORD_A";
     private final static String RECORD_PLAYER_B = "RECORD_B";
 
+    private final static String R_GAMES_PLAYER_A = "R_GAMES_A";
+    private final static String R_GAMES_PLAYER_B = "R_GAMES_B";
+    private final static String R_RECORD_PLAYER_A = "R_RECORD_A";
+    private final static String R_RECORD_PLAYER_B = "R_RECORD_B";
+
     // The set counters
     private final Counter sets;
 
     // Game counters for the two players
     private final int[] games = {0, 0};
+    private final int[] retained = {0, 0};
     private final String[] record = {"", ""};
+    private final String[] retainedRecord = {"", ""};
 
     // Reference to the interface
     private final TextView[] mtvGames;
@@ -72,10 +79,25 @@ public final class GameCounter implements Counter {
         displayGameCounter(1);
     }
 
+    // Retain the current value of the counters and the set scores
+    @Override
+    public void retain() {
+        retained[0] = games[0];
+        retained[1] = games[1];
+        retainedRecord[0] = record[0];
+        retainedRecord[1] = record[1];
+    }
+
     // Restore the previous value of the counters
     @Override
     public void undo() {
-        // TO DO
+        games[0] = retained[0];
+        games[1] = retained[1];
+        record[0] = retainedRecord[0];
+        record[1] = retainedRecord[1];
+        displayRecord();
+        displayGameCounter(0);
+        displayGameCounter(1);
     }
 
     // Save the counters state
@@ -84,9 +106,15 @@ public final class GameCounter implements Counter {
         outState.putInt(GAMES_PLAYER_A, games[0]);
         outState.putInt(GAMES_PLAYER_B, games[1]);
 
+        outState.putInt(R_GAMES_PLAYER_A, retained[0]);
+        outState.putInt(R_GAMES_PLAYER_B, retained[1]);
+
         // Save the record of the sets played
         outState.putString(RECORD_PLAYER_A, record[0]);
         outState.putString(RECORD_PLAYER_B, record[1]);
+
+        outState.putString(R_RECORD_PLAYER_A, retainedRecord[0]);
+        outState.putString(R_RECORD_PLAYER_B, retainedRecord[1]);
     }
 
     // Restore the counters state
@@ -96,9 +124,15 @@ public final class GameCounter implements Counter {
         games[0] = savedInstanceState.getInt(GAMES_PLAYER_A);
         games[1] = savedInstanceState.getInt(GAMES_PLAYER_B);
 
+        retained[0] = savedInstanceState.getInt(R_GAMES_PLAYER_A);
+        retained[1] = savedInstanceState.getInt(R_GAMES_PLAYER_B);
+
         // Retrieve the set record
         record[0] = savedInstanceState.getString(RECORD_PLAYER_A);
         record[1] = savedInstanceState.getString(RECORD_PLAYER_B);
+
+        retainedRecord[0] = savedInstanceState.getString(R_RECORD_PLAYER_A);
+        retainedRecord[1] = savedInstanceState.getString(R_RECORD_PLAYER_B);
 
         // Display the record
         displayRecord();

@@ -107,24 +107,47 @@ public class MainActivity extends AppCompatActivity implements TennisController 
     // Record a point for the player
     public void point(int player) {
         if (player < 0 || player > 1) throw new ArrayIndexOutOfBoundsException();
-        pointCounter.increment(player);
+        if (!isEndOfMatch()) {
+            retainCounterState();
+            pointCounter.increment(player);
+        }
     }
 
     // Record an ace for the player
     public void ace(int player) {
         if (player < 0 || player > 1) throw new ArrayIndexOutOfBoundsException();
-        aceCounter.increment(player);
-        pointCounter.increment(player);
+        if (!isEndOfMatch()) {
+            retainCounterState();
+            aceCounter.increment(player);
+            pointCounter.increment(player);
+        }
     }
 
     // Record a double fault for the player
     public void fault(int player) {
         if (player < 0 || player > 1) throw new ArrayIndexOutOfBoundsException();
-        faultCounter.increment(player);
-        pointCounter.increment(1 - player);
+        if (!isEndOfMatch()) {
+            retainCounterState();
+            faultCounter.increment(player);
+            pointCounter.increment(1 - player);
+        }
     }
 
     // Various utility methods
+
+    // True if the match ended
+    private boolean isEndOfMatch() {
+        return setCounter.value(0) >= 3 || setCounter.value(1) >= 3;
+    }
+
+    // Retain the current state of the counters
+    private void retainCounterState() {
+        setCounter.retain();
+        gameCounter.retain();
+        pointCounter.retain();
+        aceCounter.retain();
+        faultCounter.retain();
+    }
 
     // Creates the score counters
     private void createCounters() {
@@ -133,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements TennisController 
         pointCounter = new PointCounter(tvPoints, tvGameInfo, gameCounter);
         aceCounter = new AceCounter(tvAces);
         faultCounter = new FaultCounter(tvFaults);
+        retainCounterState();
     }
 
     // Find the score counters on the interface

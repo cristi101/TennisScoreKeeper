@@ -10,6 +10,8 @@ public interface Counter {
     int increment(int player); // Increment the counter
     int value(int player); // return the current value
     void reset(); // set the counter to 0
+
+    void retain(); // make a copy of the counter to be able to perform undo
     void undo(); // restore the counter to previous value
     void save(Bundle outState); // save the counter state
     void restore(Bundle savedInstanceState); // restore the counter state
