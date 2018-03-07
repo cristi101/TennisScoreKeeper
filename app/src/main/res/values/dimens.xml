@@ -9,8 +9,7 @@
     <dimen name="button_size">20sp</dimen>
 
     <!-- Score table gaps -->
-    <dimen name="h_gap">1dp</dimen>
-    <dimen name="v_gap">1dp</dimen>
+    <dimen name="gap">1dp</dimen>
 
     <!-- Button elevation -->
     <dimen name="elevation">16dp</dimen>

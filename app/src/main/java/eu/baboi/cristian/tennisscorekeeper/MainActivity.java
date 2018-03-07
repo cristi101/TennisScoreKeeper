@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements TennisController 
 
     // The TennisController interface methods
 
-    // Undo the last action - need changes
+    // Undo the last action
     public void undo() {
         setCounter.undo();
         gameCounter.undo();
